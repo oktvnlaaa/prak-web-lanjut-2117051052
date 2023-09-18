@@ -3,25 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo base_url('./css/style.css'); ?>">
     <title>Document</title>
 </head>
 <body>
-    <table>
-    <tr>
-        <td>Nama</td>
-        <td>:</td>
-        <td><?= $nama ?></td>
-    </tr>
-    <tr>
-        <td>Kelas</td>
-        <td>:</td>
-        <td><?= $kelas ?></td>
-    </tr>
-    <tr>
-        <td>NPM</td>
-        <td>:</td>
-        <td><?= $npm ?></td>
-    </tr>
-    </table>
+
+    <center>
+    </center>
+
+    <center>
+      <div class="container">
+      <img src ="
+    <?php
+        echo base_url('./img/yola.jpg') ;
+    ?>">
+      <div class="item" >
+            <?= $nama?>
+</div>
+<div class="item">
+            <?= $kelas?>
+</div>
+<div class="item">
+            <?= $npm?>
+</div>
+
+</div>
+</center>
+
 </body>
 </html>
