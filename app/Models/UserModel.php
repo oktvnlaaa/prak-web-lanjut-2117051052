@@ -9,7 +9,6 @@ class UserModel extends Model
     public function saveUser($data){
         $this->insert($data);
     }
-
     protected $DBGroup          = 'default';
     protected $table            = 'user';
     protected $primaryKey       = 'id';
@@ -20,7 +19,7 @@ class UserModel extends Model
     protected $allowedFields    = ['nama', 'npm', 'id_kelas'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

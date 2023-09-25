@@ -16,7 +16,7 @@ class KelasModel extends Model
     protected $allowedFields    = ['nama_kelas'];
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

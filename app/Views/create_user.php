@@ -36,7 +36,10 @@
             }
             ?>
         </select>
+<<<<<<< HEAD
         <!-- <input class="form-control" type="text" placeholder="Default input" aria-label="default input example" type="text" name="kelas" id="" style="width: 20%"> -->
+=======
+>>>>>>> 349411e779842dc1d8c4d1441b6645923c5286db
         <br>
         
         <button type="submit" class="btn btn-secondary" >Submit</button>
