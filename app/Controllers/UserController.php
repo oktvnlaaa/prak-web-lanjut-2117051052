@@ -53,13 +53,13 @@ class UserController extends BaseController
             'nama' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'WAJIB DI ISI Yaa'
+                    'required' => 'WAJIB DI ISI YGY'
                 ]
                 ],
             'npm' => [
                 'rules' => 'required|is_unique[user.npm]',
                 'errors' => [
-                    'required' => 'WAJIB DI ISI Yaa',
+                    'required' => 'WAJIB DI ISI YGY',
                     'is_unique' => 'Sudah Terpakai'
                 ]
             ]
