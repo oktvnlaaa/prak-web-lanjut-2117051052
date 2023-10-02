@@ -4,7 +4,16 @@
 
 body{
 
-    background-color: #ff5208;
+    /* Membuat gradasi linear vertikal */
+    background: linear-gradient(to bottom, #00ffbb, #00d5ff);
+    /* Atur warna teks agar terlihat dengan baik di atas gradasi */
+    color: #ffffff;
+    /* Mengatur ukuran margin dan padding */
+    margin: 0;
+    padding: 0;
+    /* Mengatur tinggi elemen body agar sesuai dengan tinggi tampilan browser */
+    height: 100vh;
+/* background-color: #a866ff; */
 
 }
 .container{

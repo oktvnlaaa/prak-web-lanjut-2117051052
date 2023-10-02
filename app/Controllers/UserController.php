@@ -3,14 +3,25 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\KelasModel;
 use App\Models\UserModel;
 
 class UserController extends BaseController
 {
+    public $kelasModel;
+    public $userModel;
+    public function __construct(){
+        $this->userModel = new UserModel();
+        $this->kelasModel = new KelasModel();
+    }
     protected $helpers=['Form'];
     public function index()
     {
-        
+        $data = [
+            'title' => 'List User',
+            'user' => $this->userModel->getUser(),
+        ];
+        return view('list_user', $data);
     }
     public function profile($nama = "", $kelas = "", $npm = ""){
         $data = [
@@ -21,26 +32,10 @@ class UserController extends BaseController
         return view('profile', $data);
 }
     public function create(){
-        $kelas = [
-            [
-                'id' => 1,
-                'nama_kelas' => 'A'
-            ],
-            [
-                'id' => 2,
-                'nama_kelas' => 'B'
-            ],
-            [
-                'id' => 3,
-                'nama_kelas' => 'C'
-            ],
-            [
-                'id' => 4,
-                'nama_kelas' => 'D'
-            ],
-        ];
+        $kelas = $this->kelasModel->getKelas();
 
-        $data = [
+         $data = [
+            'title' => 'Create User',
             'kelas' => $kelas,
         ];
 
@@ -68,20 +63,19 @@ class UserController extends BaseController
             return redirect()->back()->withInput();
         }
 
-       $userModel = new UserModel();
-
-       $userModel->saveUser([
+       $this->userModel->saveUser([
         'nama' => $this->request->getVar('nama'),
         'id_kelas' => $this->request->getVar('kelas'),
         'npm' => $this->request->getVar('npm'),
        ]);
 
         $data = [
+            'title' => 'Create User',
             'nama' => $this->request->getVar('nama'),
             'kelas' => $this->request->getVar('kelas'),
             'npm' => $this->request->getVar('npm'),
         ];
-        return view('profile', $data);
+        return redirect()->to('/user');
     }
 
 	/**
