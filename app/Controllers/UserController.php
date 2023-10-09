@@ -8,13 +8,27 @@ use App\Models\UserModel;
 
 class UserController extends BaseController
 {
-    public $kelasModel;
+    protected $helpers = ['Form'];
+
     public $userModel;
-    public function __construct(){
+    public $kelasModel;
+
+    public function __construct()
+    {
         $this->userModel = new UserModel();
         $this->kelasModel = new KelasModel();
     }
-    protected $helpers=['Form'];
+
+    public function show($id){
+        $user = $this->userModel->getUser($id);
+
+        $data = [
+            'title' => 'Profile',
+            'user'  => $user,
+        ];
+        return view('profile', $data);
+    }
+
     public function index()
     {
         $data = [
@@ -23,18 +37,20 @@ class UserController extends BaseController
         ];
         return view('list_user', $data);
     }
-    public function profile($nama = "", $kelas = "", $npm = ""){
+    public function profile($nama = "", $kelas = "", $npm = "")
+    {
         $data = [
             'nama' => $nama,
             'kelas' => $kelas,
             'npm' => $npm,
         ];
         return view('profile', $data);
-}
-    public function create(){
+    }
+    public function create()
+    {
         $kelas = $this->kelasModel->getKelas();
 
-         $data = [
+        $data = [
             'title' => 'Create User',
             'kelas' => $kelas,
         ];
@@ -42,32 +58,47 @@ class UserController extends BaseController
         return view('create_user', $data);
     }
 
-    public function store(){
+    public function store()
+    {
+
         //validasi input
-        if(!$this->validate([
-            'nama' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'WAJIB DI ISI YGY'
-                ]
+        if (
+            !$this->validate([
+                'nama' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Tidak Boleh Kosong'
+                    ]
                 ],
-            'npm' => [
-                'rules' => 'required|is_unique[user.npm]',
-                'errors' => [
-                    'required' => 'WAJIB DI ISI YGY',
-                    'is_unique' => 'Sudah Terpakai'
+                'npm' => [
+                    'rules' => 'required|is_unique[user.npm]',
+                    'errors' => [
+                        'required' => 'Tidak Boleh Kosong',
+                        'is_unique' => 'NPM Sudah Terpakai'
+                    ]
                 ]
-            ]
-        ])) {
+            ])
+        ) {
             session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->back()->withInput();
         }
 
-       $this->userModel->saveUser([
-        'nama' => $this->request->getVar('nama'),
-        'id_kelas' => $this->request->getVar('kelas'),
-        'npm' => $this->request->getVar('npm'),
-       ]);
+        $path = 'assets/uploads/img/';
+
+        $foto = $this->request->getFile('foto');
+
+        $name = $foto->getRandomName();
+
+        if ($foto->move($path, $name)) {
+            $foto = base_url($path . $name);
+        }
+
+        $this->userModel->saveUser([
+            'nama'     => $this->request->getVar('nama'),
+            'id_kelas' => $this->request->getVar('kelas'),
+            'npm'      => $this->request->getVar('npm'),
+            'foto'     => $foto
+        ]);
 
         $data = [
             'title' => 'Create User',
@@ -78,19 +109,21 @@ class UserController extends BaseController
         return redirect()->to('/user');
     }
 
-	/**
-	 * @return mixed
-	 */
-	public function getHelpers() {
-		return $this->helpers;
-	}
-	
-	/**
-	 * @param mixed $helpers 
-	 * @return self
-	 */
-	public function setHelpers($helpers): self {
-		$this->helpers = $helpers;
-		return $this;
-	}
+    /**
+     * @return mixed
+     */
+    public function getHelpers()
+    {
+        return $this->helpers;
+    }
+
+    /**
+     * @param mixed $helpers 
+     * @return self
+     */
+    public function setHelpers($helpers): self
+    {
+        $this->helpers = $helpers;
+        return $this;
+    }
 }
