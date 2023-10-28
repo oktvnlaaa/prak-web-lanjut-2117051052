@@ -1,24 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo base_url('./css/style.css'); ?>">
-    <title>Document</title>
-</head>
-<body>
+<?= $this->extend('layouts/app') ?>
 
-    <center>
-      <div class="container">
-        <div class="w-100 d-grid border gap-2" style="height: 100vh: place-content: center:">
-          <div class="w-50 text-center border m-auto">
-          <img src="<?= $user['foto'] ?? base_url('/assets/img/foto_public/assets/uploads/img/1696296804_fa94e9993fb3c7d3a14c.jpg')?>" alt="foto" style="height: 250px; width: 250px; border-radius: 50%; object-fit: cover; object-position: 0 -8px;"  border="2px" ><br>
-          </div>
-          <div class="nama"><?= $user['nama'] ?></div>
-          <div class="npm"><?= $user['npm'] ?></div>
-          <div class="nama_kelas"><?= $user['nama_kelas'] ?></div>
-        </div>
-</center>
+<?= $this->section('content') ?>
 
-</body>
-</html>
+<!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Profile</a>
+     </div>
+</nav> -->
+<br>
+<div class="biodata">
+    <div style="text-align:center;">
+    <img src="<?= $user['foto'] ?? base_url('/assets/img/foto_def.png')?>" alt="foto" style="height: 250px; width: 250px; border-radius: 50%; object-fit: cover; object-position: 0 -8px;"  border="2px" ><br>
+        <p><h2><b>Hi, I'm</b></h2></p>  
+        <button type="button" class="btn btn-secondary" style="width: 300px;"><?= $user['nama']  ?></button><br><br>
+        <button type="button" class="btn btn-secondary" style="width: 300px;">Kelas <?= $user['nama_kelas']  ?></button><br><br>
+        <button type="button" class="btn btn-secondary" style="width: 300px;">NPM <?= $user['npm']  ?></button><br><br>
+        <p><i>@Computer Science 2021 University of Lampung</i></p>
+    </div>
+</div>
+
+<?= $this->endSection() ?>
