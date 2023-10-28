@@ -4,8 +4,11 @@
     <center>
     <?php $validation = \Config\Services::validation();?>
 
-    <form action="<?= base_url('/user/store')?>" method="POST">
-        <label for="">Nama : </label>
+    <form action="<?= base_url('/user/store')?>" method="POST" enctype="multipart/form-data">
+    
+    <input type="file" name="foto" id="foto" class="form-control">    
+
+    <label for="">Nama : </label>
         
         <input class="form-control <?= (empty(validation_show_error('nama'))) ? '' : 'is-invalid' ?>" type="text" placeholder="Default input" aria-label="default input example" type="text" name="nama" id="" style="width: 20%" value="<?= old('nama') ?>">
         <?= validation_show_error('nama'); ?>

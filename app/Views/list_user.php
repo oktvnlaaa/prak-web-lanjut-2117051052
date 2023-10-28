@@ -5,7 +5,10 @@
 <nav class="navbar bg-light">
     <!-- Navbar -->
     <div class="container-fluid">
-    </div>
+        <a href="<?= base_url('user/create') ?>">
+        Tambah Data 
+    </a>
+</div>
 </nav>
 
 <div class="container">
@@ -37,8 +40,9 @@
                         <td class="col justify-content-center text-center"><?= $user['npm'] ?></td>
                         <td class="col justify-content-center text-center"><?= $user['nama_kelas'] ?></td>
                         <td class="col justify-content-center text-center">
-                            <button type="button" class="btn btn-warning">Edit</button>
-                            <button type="button" class="btn btn-danger">Hapus</button>
+                            <a href="<?= base_url('user/' . $user['id']) ?>">Detail</a>
+                            <a href="<?= base_url('user/' . $user['id'] . '/edit') ?>">Edit</a>
+                            <button type="button">Delete</button>
                         </td>
                     </tr>
                 <?php
