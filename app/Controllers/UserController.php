@@ -109,6 +109,48 @@ class UserController extends BaseController
         return redirect()->to('/user');
     }
 
+    public function edit($id){
+        $user = $this->userModel->getUser($id);
+        $kelas = $this->kelasModel->getKelas();
+
+        $data = [
+            'title' => 'Edit User',
+            'user'  => $user,
+            'kelas' => $kelas,
+        ];
+        return view('edit_user', $data);
+    }
+
+    public function update($id){
+        $path = 'assets/uploads/img/';
+
+        $foto = $this->request->getFile('foto');
+
+        $data = [
+            'nama'      => $this->request->getVar('nama'),
+            'id_kelas'  => $this->request->getVar('kelas'),
+            'npm'       => $this->request->getVar('npm'),
+            'foto'      => $foto_path,
+        ];
+
+        if ($foto->isValid()){
+            $name = $foto->getRandomName();;
+
+            if ($foto->move ($path, $name)){
+                $foto_path = base_url($path . $name);
+            }
+        }
+
+        $result = $this->userModel->updateUser($data, $id);
+
+        if(!$result){
+            return redirect()->back()->withInput()
+            ->with('error', 'Gagal Menyimpan Data');
+        }
+
+        return redirect()->to('/user');
+    }
+
     /**
      * @return mixed
      */

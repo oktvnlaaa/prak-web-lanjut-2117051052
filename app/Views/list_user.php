@@ -41,7 +41,7 @@
                         <td class="col justify-content-center text-center"><?= $user['nama_kelas'] ?></td>
                         <td class="col justify-content-center text-center">
                             <a href="<?= base_url('user/' . $user['id']) ?>">Detail</a>
-                            <button type="button">Edit</button>
+                            <a href="<?= base_url('user/' . $user['id'] . '/edit') ?>">Edit</a>
                             <button type="button">Delete</button>
                         </td>
                     </tr>
