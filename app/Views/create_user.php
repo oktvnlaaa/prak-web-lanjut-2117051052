@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo base_url('./css/style.css'); ?>">
-    <title>Create User</title>
-</head>
-<body>
+<?= $this->extend('layouts/app') ?>
+<?= $this->section('content') ?>
+
     <center>
     <?php $validation = \Config\Services::validation();?>
 
-    <form action="<?= base_url('/user/store')?>" method="POST">
-        <label for="">Nama : </label>
+    <form action="<?= base_url('/user/store')?>" method="POST" enctype="multipart/form-data">
+    
+    <input type="file" name="foto" id="foto" class="form-control">    
+
+    <label for="">Nama : </label>
         
         <input class="form-control <?= (empty(validation_show_error('nama'))) ? '' : 'is-invalid' ?>" type="text" placeholder="Default input" aria-label="default input example" type="text" name="nama" id="" style="width: 20%" value="<?= old('nama') ?>">
         <?= validation_show_error('nama'); ?>
@@ -36,10 +33,6 @@
             }
             ?>
         </select>
-<<<<<<< HEAD
-        <!-- <input class="form-control" type="text" placeholder="Default input" aria-label="default input example" type="text" name="kelas" id="" style="width: 20%"> -->
-=======
->>>>>>> 349411e779842dc1d8c4d1441b6645923c5286db
         <br>
         
         <button type="submit" class="btn btn-secondary" >Submit</button>
@@ -47,5 +40,4 @@
 
     
     </center>
-</body>
-</html>
+    <?= $this->endSection() ?>
